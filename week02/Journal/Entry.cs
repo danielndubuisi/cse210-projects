@@ -7,8 +7,8 @@ public class Entry
     public string _entryText = "";
 
     // method
-    public void DisplayEntries()
+    public void Display()
     {
-        Console.WriteLine("Displays something!");
+        Console.WriteLine($"Date: {_date} - Prompt: {_promptText}\n{_entryText}\n");
     }
 }
