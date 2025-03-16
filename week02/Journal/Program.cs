@@ -6,10 +6,8 @@ class Program
     {
         Console.WriteLine("Welcome to the Journal Program!");
 
-        // initialize class objects
+        // instantiate journal class
         Journal myJournal = new Journal();
-        PromptGenerator randomPrompt = new PromptGenerator();
-        Entry entry = new Entry();
         
         // loop based on user choice
         int choice =  0;
@@ -24,6 +22,9 @@ class Program
             switch (choice)
             {
                 case 1:
+                    // instantiate promptGenerator class
+                    PromptGenerator randomPrompt = new PromptGenerator();
+
                     // generate random prompt
                     string prompt = randomPrompt.GetRandomPrompt();
                     Console.WriteLine(prompt);
@@ -31,7 +32,10 @@ class Program
                     // get user entry
                     string userEntry = Console.ReadLine();
 
-                    // store new entry 
+                    // instantiate entry class object
+                    Entry entry = new Entry();
+
+                    // store entry data
                     entry._date = DateTime.Now.ToShortDateString();
                     entry._promptText = prompt;
                     entry._entryText = userEntry;
@@ -53,11 +57,15 @@ class Program
                     break;
 
                 case 3:
-                    Console.WriteLine("choice is 3");
+                    Console.WriteLine("What is the filename (eg. jornal.txt)? ");
+                    string file = Console.ReadLine();
+                    myJournal.LoadFromFile(file);
                     break;
 
                 case 4:
-                    Console.WriteLine("choice is 4");
+                    Console.Write("What is the filename (eg. journal.txt)? ");
+                    string filename = Console.ReadLine();
+                    myJournal.SaveToFile(filename);
                     break;
 
                 default:
