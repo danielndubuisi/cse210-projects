@@ -57,13 +57,13 @@ class Program
                     break;
 
                 case 3:
-                    Console.WriteLine("What is the filename (eg. jornal.txt)? ");
+                    Console.WriteLine("What is the filename (eg. jornal.csv)? ");
                     string file = Console.ReadLine();
                     myJournal.LoadFromFile(file);
                     break;
 
                 case 4:
-                    Console.Write("What is the filename (eg. journal.txt)? ");
+                    Console.Write("What is the filename (eg. journal.csv)? ");
                     string filename = Console.ReadLine();
                     myJournal.SaveToFile(filename);
                     break;
