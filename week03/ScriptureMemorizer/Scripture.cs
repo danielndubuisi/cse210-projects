@@ -30,7 +30,7 @@ public class Scripture
     private string GetWords()
     {
         List<string> texts = [];
-        
+
         foreach (Word word in _words)
         {
             texts.Add(word.GetDisplayText());
@@ -44,11 +44,23 @@ public class Scripture
     {
         Random random = new Random();
 
-        for (int i = 0; i < numberToHide; i++)
+        // only hide words that are not already hidden
+        List<Word> wordsToHide = new List<Word>();
+        foreach (Word word in _words)
         {
-            int index = random.Next(0, _words.Count);
-            _words[index].Hide();
+            if (!word.IsHidden())
+            {
+                wordsToHide.Add(word);
+            }
         }
+
+        // shuffle and hide the specified number of words
+        for (int i = 0; i < numberToHide && wordsToHide.Count > 0; i++)
+        {
+            int index = random.Next(0, wordsToHide.Count);
+            wordsToHide[index].Hide();
+            wordsToHide.RemoveAt(index); // remove the word from the list after hiding
+        }    
     }
 
     public string GetDisplayText()

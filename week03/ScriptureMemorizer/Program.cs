@@ -14,10 +14,10 @@ class Program
         Scripture scripture = new Scripture(reference, scriptureText);
 
         // pressing enter returns empty string
-        string userChoice;
+        string userChoice = "";
 
         // loop to display the scripture text
-        do
+        while (userChoice != "quit" && !scripture.IsCompletelyHidden())
         {
             Console.WriteLine(scripture.GetDisplayText());
 
@@ -30,10 +30,8 @@ class Program
             if (userChoice == "")
             {
                 scripture.HideRandomWords(1);
-                Console.WriteLine(scripture.GetDisplayText());
             }
-            
-        } while (userChoice != "quit" && !scripture.IsCompletelyHidden());
+        };
 
         Console.WriteLine("Goodbye!");
     }
