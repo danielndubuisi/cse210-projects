@@ -1,5 +1,7 @@
 using System;
 
+// This code creates a simple YouTube video viewer that displays the title, author, length, number of comments, and each comment for a list of videos with the execution screenshot saved as 'execution.png'.
+
 class Program
 {
     static void Main(string[] args)
@@ -55,6 +57,7 @@ class Program
         // Create a list of videos and add the video objects to the list
         List<Video> videos = [video1, video2, video3];  
 
+        Console.WriteLine("\nWelcome to the YouTube Video Viewer!\n");
         // Loop through each video in the list and display its details
         foreach (Video video in videos)
         {
