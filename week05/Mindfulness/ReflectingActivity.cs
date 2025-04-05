@@ -1,3 +1,4 @@
+using System.Diagnostics;
 // reflecting activity class
 public class ReflectingActivity : Activity
 {
@@ -36,26 +37,64 @@ public class ReflectingActivity : Activity
     // methods
     public void Run()
     {
+        // get duration to run for
+        int duration = base.GetDuration();
+
+        Console.WriteLine("\n Now ponder on each of the following questions as related to your experience.");
+        Console.Write($"You may begin in: ");
+        base.ShowCountDown(4);
+
+        // clear console
+        Console.Clear();
+
+        // use stopwatch to track how long it runs
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+
+        while (stopwatch.Elapsed.TotalSeconds < duration)
+        {  
+            DisplayQuestions();
+        }
+
+        // end stop watch after duration is elapsed
+        stopwatch.Stop();
 
     }
 
-    public string GetRandomPrompt()
+    private string GetRandomPrompt()
     {
-        return "";
+        Random random = new Random();
+        int index = random.Next(0, _prompts.Count);
+
+        // choose a random prompt from list
+        string prompt = _prompts[index];
+        return prompt;
     }
 
     public string GetRandomQuestion()
     {
-        return "";
+        Random random = new Random();
+        int index = random.Next(0, _questions.Count);
+
+        // choose a random question from list
+        string question = _questions[index];
+        return question;
     }
 
     public void DisplayPrompt()
     {
+        Console.WriteLine("\n Consider the following prompt:\n");
+        Console.WriteLine($" --- {GetRandomPrompt()} ---");
 
+        // wait for user to hit enter to continue
+        Console.WriteLine("\nWhen you have something in mind, press enter to continue.");
+        Console.ReadLine();
     }
 
     public void DisplayQuestions()
     {
-
+        Console.Write($"> {GetRandomQuestion()} ");
+        base.ShowSpinner(7);
+        Console.WriteLine();
     }
 }

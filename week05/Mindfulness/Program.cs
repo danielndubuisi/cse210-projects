@@ -27,14 +27,14 @@ class Program
                     // display start message
                     breathingActivity.DisplayStartingMessage();
 
-                    // activity core
-                    Console.WriteLine(breathingActivity.GetDuration());
+                    // show spinner
+                    breathingActivity.ShowSpinner(5);
+                    
+                    // run activity
+                    breathingActivity.Run();
 
                     // display ending message once activity is completed
                     breathingActivity.DisplayEndingMessage();
-
-                    // pause for 2 seconds
-                    Thread.Sleep(2000);
 
                     // clear console
                     Console.Clear();
@@ -47,14 +47,17 @@ class Program
                     // display start message
                     reflectingActivity.DisplayStartingMessage();
 
-                    // activity core
-                    Console.Write(reflectingActivity.GetDuration());
+                    // show spinner
+                    reflectingActivity.ShowSpinner(5);
+
+                    // display prompt
+                    reflectingActivity.DisplayPrompt();
+
+                    // run activity
+                    reflectingActivity.Run();
 
                     // display ending message once activity is completed
                     reflectingActivity.DisplayEndingMessage();
-
-                    // pause for 2 seconds
-                    Thread.Sleep(2000);
 
                     // clear console
                     Console.Clear();
@@ -63,18 +66,18 @@ class Program
                 // listing activity
                 case 3:
                     // instantiate activity
-                    ListingActivity listingActivity = new ListingActivity(1);
+                    ListingActivity listingActivity = new ListingActivity();
                     // display start message
                     listingActivity.DisplayStartingMessage();
 
-                    // activity core
-                    Console.Write(listingActivity.GetDuration());
+                    // show spinner
+                    listingActivity.ShowSpinner(5);
+
+                    // run activity
+                    listingActivity.Run();
 
                     // display ending message once activity is completed
                     listingActivity.DisplayEndingMessage();
-
-                    // pause for 2 seconds
-                    Thread.Sleep(2000);
 
                     // clear console
                     Console.Clear();
@@ -87,6 +90,6 @@ class Program
 
         // clear console
         Console.Clear();
-        Console.WriteLine("You Quit! Goodbye!");
+        Console.WriteLine("You Quit!");
     }
 }

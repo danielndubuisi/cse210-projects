@@ -56,20 +56,58 @@ public class Activity
         Console.Write("How long, in seconds, would you like for your session? ");
         int duration = int.Parse(Console.ReadLine());
         SetDuration(duration);
+
+        Console.Clear();
+        Console.WriteLine("Get ready...");
     }
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine($"\nWell done!!\nYou have completed another {GetDuration()} seconds of the {_name} Activity.");
+        Console.WriteLine($"\nWell done!!");
+        ShowSpinner(4);
+        Console.WriteLine($"\nYou have completed another {GetDuration()} seconds of the {_name} Activity.");
+        ShowSpinner(4);
     }
 
     public void ShowSpinner(int seconds)
     {
+        // get how long spinner should run
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(seconds);
 
+        // spinner characters
+        List<string> animationStrings = ["|", "/", "-", "\\"];
+
+        int i = 0;
+
+        // spin for a set period
+        while (DateTime.Now < endTime)
+        {
+
+            // erase & replace previous character to simulate spinner effect
+            string s = animationStrings[i];
+            Console.Write(s);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
+
+            i++;
+
+            //reset if out of characters
+            if (i >= animationStrings.Count)
+            {
+                i = 0;
+            }  
+        }
     }
 
     public void ShowCountDown(int second)
     {
-
+        // count down
+        for (int i = second; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
+        }
     }
 }
