@@ -6,7 +6,7 @@ public class ListingActivity : Activity
     // attributes
     private int _count;
     private List<string> _prompts;
-
+    private List<string> _items; //attribute to store user input
     // constructor 
     public ListingActivity()
     {
@@ -23,6 +23,7 @@ public class ListingActivity : Activity
             "When have you felt the Holy Ghost this month?",
             "Who are some of your personal heroes?"
         ];
+        _items = [];
     }
 
     // getter
@@ -53,13 +54,16 @@ public class ListingActivity : Activity
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        List<string> items = [];
+        // clear list before new activity starts
+        _items.Clear();
+
+        // get list of items from user while time is running
         while (stopwatch.Elapsed.TotalSeconds < duration)
         {
-            GetListFromUser(items);
+            GetListFromUser();
         }
         // set count to length of user list
-        SetCount(items.Count);
+        SetCount(_items.Count);
 
         // end stop watch after duration is elapsed
         stopwatch.Stop();
@@ -77,12 +81,12 @@ public class ListingActivity : Activity
         return prompt;        
     }
 
-    public List<string> GetListFromUser(List<string> items)
+    public List<string> GetListFromUser()
     {
         Console.Write("> ");
         string listItem = Console.ReadLine();
-        items.Add(listItem);
+        _items.Add(listItem);
 
-        return items;
+        return _items;
     }
 }

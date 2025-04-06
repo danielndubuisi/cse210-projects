@@ -5,6 +5,7 @@ public class ReflectingActivity : Activity
     // attributes
     private List<string> _prompts;
     private List<string> _questions;
+    private List<string> _remainingQuestions; // attribute to track remaining questions
 
     // constructor
     public ReflectingActivity()
@@ -31,6 +32,9 @@ public class ReflectingActivity : Activity
             "What did you learn about yourself through this experience?",
             "How can you keep this experience in mind in the future?"
         ];
+        // initialize this to have all questions
+        // so that we can remove them as they are used
+        _remainingQuestions = new List<string>(_questions);
     }
 
 
@@ -74,10 +78,20 @@ public class ReflectingActivity : Activity
     public string GetRandomQuestion()
     {
         Random random = new Random();
-        int index = random.Next(0, _questions.Count);
+        int index = random.Next(0, _remainingQuestions.Count);
 
-        // choose a random question from list
-        string question = _questions[index];
+        // choose a random question from remaining questions list
+        string question = _remainingQuestions[index];
+
+        // remove question from remaining questions list
+        _remainingQuestions.RemoveAt(index);
+
+        // if all questions have been used, reset the list
+        if (_remainingQuestions.Count == 0)
+        {
+            _remainingQuestions = new List<string>(_questions);
+        }
+
         return question;
     }
 
