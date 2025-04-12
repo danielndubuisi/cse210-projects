@@ -15,6 +15,17 @@ public class CheckListGoal : Goal
         _bonus = bonusPoints;
     }
 
+    // getter
+    protected int GetAmountCompleted()
+    {
+        return _amountCompleted;
+    }
+
+    protected int GetTarget()
+    {
+        return _target;
+    }
+
 
     // methods
     public override void RecordEvent()
@@ -22,14 +33,15 @@ public class CheckListGoal : Goal
         
     }
 
-    public override bool isComplete()
+    public override bool IsComplete()
     {
-        return true;
+        bool completed = (GetAmountCompleted() == GetTarget()) ? true : false;
+        return completed;
     }
 
     public override string GetDetailsString()
     {
-        return "";
+        return $"[ ] {base.GetShortName()} ({base.GetDescription()}) -- Currently completed: {GetAmountCompleted()}/{GetTarget()} ";
     }
 
     public override string GetStringRepresentation()

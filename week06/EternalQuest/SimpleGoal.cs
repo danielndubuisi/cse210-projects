@@ -12,13 +12,12 @@ public class SimpleGoal : Goal
     }
 
     // methods
-    
     public override void RecordEvent()
     {
-        
+        Console.WriteLine();
     }
 
-    public override bool isComplete()
+    public override bool IsComplete()
     {
         return true;
     }
