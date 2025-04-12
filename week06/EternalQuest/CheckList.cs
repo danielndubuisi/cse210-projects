@@ -15,7 +15,7 @@ public class CheckListGoal : Goal
         _bonus = bonusPoints;
     }
 
-    // getter
+    // getters
     protected int GetAmountCompleted()
     {
         return _amountCompleted;
@@ -26,6 +26,10 @@ public class CheckListGoal : Goal
         return _target;
     }
 
+    protected int GetBonus()
+    {
+        return _bonus;
+    }
 
     // methods
     public override void RecordEvent()
@@ -46,7 +50,7 @@ public class CheckListGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return "";
+        return $"CheckListGoal:{base.GetShortName()},{base.GetDescription()},{base.GetPoints()},{GetBonus()},{GetTarget()},{GetAmountCompleted()}";
     }
 
 }

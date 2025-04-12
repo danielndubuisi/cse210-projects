@@ -1,5 +1,5 @@
 // this class handles all of the menu system and its related functions, including the saving of points
-using System.IO.Compression;
+using System.IO;
 
 public class GoalManager
 {
@@ -189,7 +189,34 @@ public class GoalManager
     // save goals
     public void SaveGoals()
     {
-        Console.WriteLine("Saving goals...");
+        try
+        {
+            // check if goals added
+            if (_goals.Count > 0)
+            {
+                // get file name
+                Console.Write("What is the filename for the goal file? ");
+                string filename = Console.ReadLine();
+            
+                // write goals to file
+                using (StreamWriter outputFile = new StreamWriter(filename))
+                {
+                    foreach (Goal goal in _goals)
+                    {
+                        outputFile.WriteLine(goal.GetStringRepresentation());
+                    }                
+                }
+                Console.WriteLine($"Goals saved to {filename}");
+            }            
+            else
+            {
+                Console.WriteLine("No goals found! Please create goals to save.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving goals: {ex.Message}");
+        }
     }
 
     // load goals
