@@ -35,14 +35,14 @@ public class GoalManager
         // runs the menu loop
         int userChoice = 0;
 
-        while(userChoice != 6)
+        while(userChoice != 7)
         {
             // show score
             DisplayPlayerInfo();
 
             // menu options
             Console.WriteLine("Menu Options:");
-            Console.WriteLine("\t1. Create New Goal\n\t2. List Goals\n\t3. Save Goals\n\t4. Load Goals\n\t5. Record Event\n\t6. Quit");
+            Console.WriteLine("\t1. Create New Goal\n\t2. List Goals\n\t3. Save Goals\n\t4. Load Goals\n\t5. Record Event\n\t6. Level Up\n\t7. Quit");
             Console.Write("Select a choice from the menu: ");
             userChoice = int.Parse(Console.ReadLine());
 
@@ -73,13 +73,18 @@ public class GoalManager
                 case 5:
                     RecordEvent();
                     break;
+
+                // level user up
+                case 6:
+                    LevelUp();
+                    break;
                 
                 // break and end loop
-                case 6:
+                case 7:
                     break;
                 
                 default:
-                    Console.WriteLine("Invalid choice! Select between 1 - 6");
+                    Console.WriteLine("Invalid choice! Select between 1 - 7");
                     break;
             }
         }
@@ -379,5 +384,52 @@ public class GoalManager
         }
 
         Console.WriteLine("Goals loaded successfully!");
+    }
+
+    // additional feature to level up
+    public void LevelUp()
+    {
+        //check if atleast 5 goals in list
+        if (_goals.Count >= 5)
+        {
+            Console.WriteLine("\nI see you have added atleast 5 goals.");
+            Console.Write("Are you sure you wish to level up? (y/n)");
+            // get user input
+            string input = Console.ReadLine().ToLower();
+
+            if (input == "y")
+            {
+                // count completed goals excluding eternal goals
+                int completedGoalsCount = 0;
+
+                foreach (Goal goal in _goals)
+                {
+                    if (goal.IsComplete() && !(goal is EternalGoal))
+                    {
+                        completedGoalsCount++;
+                    }
+                }
+
+                // level up if at least 5 goals are completed
+                if (completedGoalsCount >= 5)
+                {
+                    Console.WriteLine("Congratulations on leveling up! You have earned 5000 free points");
+                    // update score
+                    SetScore(GetScore() + 5000);
+                }
+                else
+                {
+                    Console.WriteLine("Complete '[X]' 5 goals to level up.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Goodbye! Build your confidence, complete more goals and return.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Create, complete and load atleast 5 goals to level up.");
+        }
     }
 }
