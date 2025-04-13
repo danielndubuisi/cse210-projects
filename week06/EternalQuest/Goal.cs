@@ -19,12 +19,12 @@ public abstract class Goal{
         return _shortName;
     }
 
-    protected string GetDescription()
+    public string GetDescription()
     {
         return _description;
     }
 
-    protected int GetPoints()
+    public int GetPoints()
     {
         return _points;
     }
@@ -36,7 +36,14 @@ public abstract class Goal{
 
     public virtual string GetDetailsString()
     {
-        return $"[ ] {GetShortName()} ({GetDescription()})";
+        if (IsComplete())
+        {
+            return $"[X] {GetShortName()} ({GetDescription()})";            
+        }
+        else
+        {
+            return $"[ ] {GetShortName()} ({GetDescription()})";            
+        }
     }
 
     public abstract string GetStringRepresentation();

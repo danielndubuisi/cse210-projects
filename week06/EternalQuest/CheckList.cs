@@ -16,36 +16,56 @@ public class CheckListGoal : Goal
     }
 
     // getters
-    protected int GetAmountCompleted()
+    public int GetAmountCompleted()
     {
         return _amountCompleted;
     }
 
-    protected int GetTarget()
+    public int GetTarget()
     {
         return _target;
     }
 
-    protected int GetBonus()
+    public int GetBonus()
     {
         return _bonus;
+    }
+
+    // setters
+    public void SetAmountCompleted()
+    {
+        _amountCompleted +=1;
     }
 
     // methods
     public override void RecordEvent()
     {
-        
+        if (_amountCompleted < _target)
+        {
+            // increment the amount completed
+            SetAmountCompleted();
+        }
+        else
+        {
+            IsComplete();
+        }       
     }
 
     public override bool IsComplete()
     {
-        bool completed = (GetAmountCompleted() == GetTarget()) ? true : false;
-        return completed;
+        return _amountCompleted == _target;
     }
 
     public override string GetDetailsString()
     {
-        return $"[ ] {base.GetShortName()} ({base.GetDescription()}) -- Currently completed: {GetAmountCompleted()}/{GetTarget()} ";
+        if (IsComplete())
+        {
+            return $"[X] {base.GetShortName()} ({base.GetDescription()}) -- Currently completed: {GetAmountCompleted()}/{GetTarget()} ";
+        }
+        else
+        {
+            return $"[ ] {base.GetShortName()} ({base.GetDescription()}) -- Currently completed: {GetAmountCompleted()}/{GetTarget()} ";           
+        }
     }
 
     public override string GetStringRepresentation()

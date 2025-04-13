@@ -11,26 +11,26 @@ public class SimpleGoal : Goal
         _isComplete = false;
     }
 
-    // getter
-    protected bool GetIsComplete()
+    // setter
+    public void SetIsComplete()
     {
-        return _isComplete;
+        _isComplete = true;
     }
 
     // methods
     public override void RecordEvent()
     {
-        Console.WriteLine();
+        SetIsComplete();
     }
 
     public override bool IsComplete()
     {
-        return true;
+        return _isComplete;
     }
 
     public override string GetStringRepresentation()
     {
-        return $"SimpleGoal:{base.GetShortName()},{base.GetDescription()},{base.GetPoints()},{GetIsComplete()}";
+        return $"SimpleGoal:{base.GetShortName()},{base.GetDescription()},{base.GetPoints()},{IsComplete()}";
     }
 
 }
